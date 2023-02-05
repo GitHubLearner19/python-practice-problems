@@ -1,3 +1,5 @@
+import math
+
 class Empty:
 
     def __init__(self):
@@ -42,6 +44,12 @@ class Empty:
     
     def path_to(self, n):
         return []
+    
+    def split_levels(self, depth):
+        return [[None]]
+    
+    def __str__(self):
+        return ''
 
 
 class Node:
@@ -119,6 +127,21 @@ class Node:
             return []
         
         return [self.value] + (self.left.path_to(n) if n < self.value else self.right.path_to(n))
+    
+    def split_levels(self, depth):
+        if depth == 1:
+            return [[self.value]]
+        
+        result = [[self.value]]
+        left_levels = self.left.split_levels(depth - 1)
+        right_levels = self.right.split_levels(depth - 1)
+        result += list(map(lambda x, y: x + y, left_levels, right_levels))
+        return result
+        
+
+    def __str__(self):
+        return str(self.split_levels(self.height()))
+        
 
 if __name__ == "__main__":
     bst = Empty().insert(42).insert(10).insert(15).insert(63)
