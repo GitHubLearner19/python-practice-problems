@@ -26,6 +26,18 @@ class Empty:
         return []
     
     def min_item(self):
+        return None
+
+    def max_item(self):
+        return None
+    
+    def balance_factor(self):
+        return None
+    
+    def balanced_everywhere(self):
+        return True
+    
+    def add_to_all(self, n):
         return Empty()
 
 
@@ -73,8 +85,29 @@ class Node:
     def min_item(self):
         if self.left.is_empty():
             return self.value
-        print(self.value)
+        
         return self.left.min_item()
+    
+    def max_item(self):
+        if self.right.is_empty():
+            return self.value
+
+        return self.right.max_item()
+    
+    def balance_factor(self):
+        return self.right.height() - self.left.height()
+    
+    def balanced_everywhere(self):
+        if self.is_leaf():
+            return True
+        
+        return self.balance_factor() >= -1 and self.balance_factor() <= 1 and self.left.balanced_everywhere() and self.right.balanced_everywhere()
+    
+    def add_to_all(self, n):
+        if self.is_leaf():
+            return Node(self.value + n, Empty(), Empty())
+
+        return Node(self.value + n, self.left.add_to_all(n), self.right.add_to_all(n))
 
 
 if __name__ == "__main__":
