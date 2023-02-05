@@ -39,6 +39,9 @@ class Empty:
     
     def add_to_all(self, n):
         return Empty()
+    
+    def path_to(self, n):
+        return []
 
 
 class Node:
@@ -109,6 +112,13 @@ class Node:
 
         return Node(self.value + n, self.left.add_to_all(n), self.right.add_to_all(n))
 
+    def path_to(self, n):
+        if self.value == n:
+            return [self.value]
+        if not self.contains(n):
+            return []
+        
+        return [self.value] + (self.left.path_to(n) if n < self.value else self.right.path_to(n))
 
 if __name__ == "__main__":
     bst = Empty().insert(42).insert(10).insert(15).insert(63)
