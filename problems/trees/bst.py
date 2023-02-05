@@ -24,6 +24,9 @@ class Empty:
 
     def inorder(self):
         return []
+    
+    def min_item(self):
+        return Empty()
 
 
 class Node:
@@ -65,7 +68,13 @@ class Node:
         if self.is_leaf():
             return [self.value]
         
-        return inorder(self.left) + [self.value] + inorder(self.right)
+        return self.left.inorder() + [self.value] + self.right.inorder()
+
+    def min_item(self):
+        if self.left.is_empty():
+            return self.value
+        print(self.value)
+        return self.left.min_item()
 
 
 if __name__ == "__main__":
