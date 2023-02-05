@@ -9,9 +9,7 @@ def compute_matching(x, y):
              x and y
     """
 
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    return x - y == 0
 
 
 #############################################################
