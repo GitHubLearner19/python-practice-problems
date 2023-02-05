@@ -9,10 +9,9 @@ def powers(N, p):
     
     Returns: an array consisting of powers of p
     """
-
-    # YOUR CODE HERE
-    # Replace None with an appropriate return value
-    return None
+    x = np.array([p]*N)
+    y = np.arange(N)
+    return x**y
 
 
 #############################################################
