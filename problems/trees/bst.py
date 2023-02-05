@@ -22,6 +22,9 @@ class Empty:
     def insert(self, n):
         return Node(n, Empty(), Empty())
 
+    def inorder(self):
+        return []
+
 
 class Node:
 
@@ -57,6 +60,12 @@ class Node:
             return Node(self.value, self.left, self.right.insert(n))
         else:
             return self
+    
+    def inorder(self):
+        if self.is_leaf():
+            return [self.value]
+        
+        return inorder(self.left) + [self.value] + inorder(self.right)
 
 
 if __name__ == "__main__":
